@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go-api-v1/cmd/api/server/routes"
 	"go-api-v1/config"
+	"go-api-v1/internal/setup"
 
 	"github.com/gin-gonic/gin"
 )
@@ -17,6 +18,13 @@ func main() {
 			panic(err)
 		}
 	}
+
+	setup := setup.NewSetup()
+	setup.Logger("go-api-v1")
+	setup.Postgres()
+	setup.Repositories()
+
+	setup.Finish()
 
 	api := setupServer()
 	api.Run(fmt.Sprintf(":%d", envs.Server.Port))
