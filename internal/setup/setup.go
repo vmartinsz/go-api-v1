@@ -15,9 +15,9 @@ type Setup struct {
 }
 
 func NewSetup() Setup {
-	Config, err := config.Load("../../../config/config.yaml")
+	Config, err := config.Load("../../../config/config.yml")
 	if err != nil {
-		Config, err = config.Load("config/config.yaml")
+		Config, err = config.Load("config/config.yml")
 		if err != nil {
 			log.Fatal(err)
 		}

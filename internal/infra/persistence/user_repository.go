@@ -3,7 +3,6 @@ package persistence
 import (
 	"go-api-v1/internal/entity"
 	"go-api-v1/internal/infra/contracts"
-	"time"
 )
 
 type UserRepositoryImpl struct {
@@ -28,11 +27,10 @@ func (ur UserRepositoryImpl) GetUser(id string) (*entity.User, error) {
 }
 
 func (ur UserRepositoryImpl) PutUser(id string, attributes map[string]interface{}) error {
-	attributes["updated_at"] = time.Now().UTC()
 
 	err := ur.Postgres.Client().
 		Model(&entity.User{}).
-		Where("ïd = ?", id).
+		Where("id = ?", id).
 		UpdateColumns(attributes).
 		Error
 
